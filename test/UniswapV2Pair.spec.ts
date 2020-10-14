@@ -18,7 +18,7 @@ const overrides = {
 describe('UniswapV2Pair', () => {
   const provider = new MockProvider({
     hardfork: 'istanbul',
-    mnemonic: 'horn horn horn horn horn horn horn horn horn horn horn horn',
+    mnemonic: 'bull bull bull bull bull bull bull bull bull bull bull bull',
     gasLimit: 9999999
   })
   const [wallet, other] = provider.getWallets()
