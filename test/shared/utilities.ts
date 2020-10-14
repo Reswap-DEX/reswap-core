@@ -7,7 +7,7 @@ import {
   keccak256,
   defaultAbiCoder,
   toUtf8Bytes,
-  solidityPack
+  solidityPack,
 } from 'ethers/utils'
 
 const PERMIT_TYPEHASH = keccak256(
@@ -27,7 +27,7 @@ function getDomainSeparator(name: string, tokenAddress: string) {
         keccak256(toUtf8Bytes(name)),
         keccak256(toUtf8Bytes('1')),
         1,
-        tokenAddress
+        tokenAddress,
       ]
     )
   )
@@ -43,9 +43,9 @@ export function getCreate2Address(
     '0xff',
     factoryAddress,
     keccak256(solidityPack(['address', 'address'], [token0, token1])),
-    keccak256(bytecode)
+    keccak256(bytecode),
   ]
-  const sanitizedInputs = `0x${create2Inputs.map(i => i.slice(2)).join('')}`
+  const sanitizedInputs = `0x${create2Inputs.map((i) => i.slice(2)).join('')}`
   return getAddress(`0x${keccak256(sanitizedInputs).slice(-40)}`)
 }
 
@@ -73,7 +73,7 @@ export async function getApprovalDigest(
             ['bytes32', 'address', 'address', 'uint256', 'uint256', 'uint256'],
             [PERMIT_TYPEHASH, approve.owner, approve.spender, approve.value, nonce, deadline]
           )
-        )
+        ),
       ]
     )
   )
