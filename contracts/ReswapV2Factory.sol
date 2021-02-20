@@ -6,14 +6,15 @@ import './ReswapV2Pair.sol';
 contract ReswapV2Factory is IReswapV2Factory {
     address public feeTo;
     address public feeToSetter;
+    bytes32 public constant INIT_CODE_PAIR_HASH = keccak256(abi.encodePacked(type(ReswapV2Pair).creationCode));
 
     mapping(address => mapping(address => address)) public getPair;
     address[] public allPairs;
 
     event PairCreated(address indexed token0, address indexed token1, address pair, uint);
 
-    constructor(address _feeToSetter) public {
-        feeToSetter = _feeToSetter;
+    constructor() public {
+        feeToSetter = msg.sender;
     }
 
     function allPairsLength() external view returns (uint) {
